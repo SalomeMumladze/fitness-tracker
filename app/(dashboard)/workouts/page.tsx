@@ -1,17 +1,13 @@
-import { workouts } from "@/app/features/workouts/data/workouts";
-import Link from "next/link";
+import { prisma } from "@/src/lib/prisma";
+import type { Workout } from "@/app/features/workouts/data/workouts";
 
-export default function WorkoutsPage() {
+export default async function WorkoutsPage() {
+  const workouts: Workout[] = await prisma.workout.findMany();
+
   return (
     <div>
-      <h1>Workouts</h1>
-
-      <Link href="/workouts/new">Create</Link>
-
-      {workouts.map((w) => (
-        <div key={w.id}>
-          <Link href={`/workouts/${w.id}`}>{w.name}</Link>
-        </div>
+      {workouts.map((w: Workout) => (
+        <p key={w.id}>{w.name}</p>
       ))}
     </div>
   );
