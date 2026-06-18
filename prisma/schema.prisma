@@ -27,12 +27,29 @@ model Workout {
   createdAt DateTime   @default(now())
 }
 
+
+model ExerciseLog {
+  id         String   @id @default(cuid())
+
+  weight     Float
+  reps       Int
+
+  exerciseId String
+  exercise   Exercise @relation(fields: [exerciseId], references: [id])
+
+  createdAt  DateTime @default(now())
+}
+
 model Exercise {
   id        String   @id @default(cuid())
   name      String
   sets      Int
   reps      Int
 
+  order     Int      @default(0)
+
   workoutId String
   workout   Workout @relation(fields: [workoutId], references: [id])
+
+  logs      ExerciseLog[]
 }
