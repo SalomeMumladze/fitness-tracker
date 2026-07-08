@@ -11,4 +11,9 @@ export const navigationItems = [
     href: "/workouts",
     icon: Dumbbell,
   },
+  {
+    title: "schedule",
+    href: "/schedule",
+    icon: Dumbbell,
+  },
 ] as const;

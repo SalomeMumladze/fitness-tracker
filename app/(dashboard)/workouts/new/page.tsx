@@ -1,25 +1,13 @@
 "use client";
 
-import { useState } from "react";
+import WorkoutForm from "../components/WorkoutForm/WorkoutForm";
 import { createWorkout } from "@/app/features/workouts/actions/createWorkout";
+import { Workout } from "@/app/features/workouts/types/workouts";
 
-export default function NewWorkoutForm() {
-  const [name, setName] = useState("");
-
-  async function handleSubmit() {
-    await createWorkout(name);
-    setName("");
+export default function NewWorkoutPage() {
+  async function handleSubmit(data: Workout) {
+    await createWorkout(data);
   }
 
-  return (
-    <div>
-      <input
-        value={name}
-        onChange={(e) => setName(e.target.value)}
-        placeholder="Workout name"
-      />
-
-      <button onClick={handleSubmit}>Create</button>
-    </div>
-  );
+  return <WorkoutForm onSubmit={handleSubmit} />;
 }
