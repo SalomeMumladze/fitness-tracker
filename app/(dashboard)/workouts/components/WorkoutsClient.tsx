@@ -12,6 +12,7 @@ import NewWorkoutButton from "./NewWorkoutButton";
 import WorkoutDialog from "./WorkoutDialog";
 import { WorkoutForm } from "./WorkoutForm";
 import { DeleteAction } from "@/components/shared/DeleteAction";
+import Link from "next/link";
 
 type WorkoutListItem = Workout & { id: string; createdAt: Date };
 
@@ -79,24 +80,26 @@ export default function WorkoutsClient({ workouts }: Props) {
               key={workout.id}
               className="group flex items-center gap-2 rounded-lg border transition-colors hover:border-primary/40 hover:bg-muted/30"
             >
-              <button
-                onClick={() => openEdit(workout)}
-                className="flex flex-1 items-center justify-between p-4 text-left"
-              >
-                <div className="flex items-center gap-3">
-                  <div className="flex size-9 items-center justify-center rounded-lg bg-primary/10 text-primary">
-                    <Dumbbell className="size-4.5" />
+              <Link href={`/workouts/${workout.id}/edit`}>
+                <button
+                  onClick={() => openEdit(workout)}
+                  className="flex flex-1 items-center justify-between p-4 text-left"
+                >
+                  <div className="flex items-center gap-3">
+                    <div className="flex size-9 items-center justify-center rounded-lg bg-primary/10 text-primary">
+                      <Dumbbell className="size-4.5" />
+                    </div>
+                    <div>
+                      <p className="font-medium">{workout.name}</p>
+                      <p className="text-xs text-muted-foreground">
+                        {workout.exercises.length} exercises
+                      </p>
+                    </div>
                   </div>
-                  <div>
-                    <p className="font-medium">{workout.name}</p>
-                    <p className="text-xs text-muted-foreground">
-                      {workout.exercises.length} exercises
-                    </p>
-                  </div>
-                </div>
 
-                <ChevronRight className="size-4 text-muted-foreground" />
-              </button>
+                  <ChevronRight className="size-4 text-muted-foreground" />
+                </button>
+              </Link>
 
               <Button
                 type="button"

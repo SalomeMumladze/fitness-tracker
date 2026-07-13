@@ -24,11 +24,7 @@ import { ExerciseDraft } from "@/app/features/workouts/types/workouts";
 import { Field, FieldError, FieldGroup } from "@/components/ui/field";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
-import {
-  DialogHeader,
-  DialogTitle,
-  DialogFooter,
-} from "@/components/ui/dialog";
+
 import ExerciseRow from "./ExerciseRow";
 
 type Props = {
@@ -81,14 +77,14 @@ export default function WorkoutForm({
       }}
       className="flex flex-col max-h-[85vh]"
     >
-      <DialogHeader className="px-6 py-5 border-b bg-muted/30 space-y-0">
+      <div className="px-6 py-5 border-b bg-muted/30 space-y-0">
         <div className="flex items-center gap-2.5">
           <div className="flex size-9 items-center justify-center rounded-lg bg-primary/10 text-primary">
             <Dumbbell className="size-4.5" />
           </div>
-          <DialogTitle className="text-lg">
+          <div className="text-lg">
             {mode === "create" ? "New Workout" : "Edit Workout"}
-          </DialogTitle>
+          </div>
         </div>
 
         <form.Field name="name">
@@ -106,7 +102,7 @@ export default function WorkoutForm({
             </Field>
           )}
         </form.Field>
-      </DialogHeader>
+      </div>
 
       <div className="flex-1 overflow-y-auto px-6 py-5 space-y-4">
         <form.Field name="exercises" mode="array">
@@ -185,7 +181,7 @@ export default function WorkoutForm({
         </form.Field>
       </div>
 
-      <DialogFooter className="px-6 m-0 border-t bg-muted/30 gap-2 sm:gap-2">
+      <div className="px-6 m-0 border-t bg-muted/30 gap-2 sm:gap-2">
         <Button type="button" variant="ghost" onClick={onCancel}>
           Cancel
         </Button>
@@ -202,7 +198,7 @@ export default function WorkoutForm({
             </Button>
           )}
         </form.Subscribe>
-      </DialogFooter>
+      </div>
     </form>
   );
 }

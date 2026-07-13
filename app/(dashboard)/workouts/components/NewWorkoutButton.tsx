@@ -1,15 +1,16 @@
 "use client";
 
+import Link from "next/link";
 import { Plus } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
-type Props = { onClick: () => void };
-
-export default function NewWorkoutButton({ onClick }: Props) {
+export default function NewWorkoutButton() {
   return (
-    <Button className="gap-2" onClick={onClick}>
-      <Plus className="size-4" />
-      New Workout
+    <Button asChild className="gap-2">
+      <Link href="/workouts/create">
+        <Plus className="size-4" />
+        Create Workout
+      </Link>
     </Button>
   );
 }
