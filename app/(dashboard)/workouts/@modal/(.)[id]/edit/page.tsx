@@ -1,26 +1,32 @@
-"use client";
+import { prisma } from "@/src/lib/prisma";
+import EditWorkoutModalClient from "./EditWorkoutModalClient";
+import { notFound } from "next/navigation";
 
-import { useRouter } from "next/navigation";
-import WorkoutDialog from "../../../components/WorkoutDialog";
-import { WorkoutForm } from "../../../components/WorkoutForm";
+type Props = {
+  params: Promise<{
+    id: string;
+  }>;
+};
 
-export default function CreateWorkoutModal() {
-  const router = useRouter();
+export default async function EditWorkoutModalPage({ params }: Props) {
+  const { id } = await params;
 
-  return (
-    <WorkoutDialog
-      open
-      onOpenChange={(open) => {
-        if (!open) router.back();
-      }}
-    >
-      <WorkoutForm
-        mode="create"
-        onSubmit={async () => {
-          router.back();
-        }}
-        onCancel={() => router.back()}
-      />
-    </WorkoutDialog>
-  );
+  const workout = await prisma.workout.findUnique({
+    where: {
+      id,
+    },
+    include: {
+      exercises: {
+        orderBy: {
+          order: "asc",
+        },
+      },
+    },
+  });
+
+  if (!workout) {
+    notFound();
+  }
+
+  return <EditWorkoutModalClient workout={workout} />;
 }

@@ -1,13 +1,9 @@
-import { WorkoutForm } from "../components/WorkoutForm";
+import CreateWorkoutClient from "./CreateWorkoutClient";
 
 export default function CreateWorkoutPage() {
   return (
-    <div className="max-w-3xl mx-auto py-10">
-      <WorkoutForm
-        mode="create"
-        onSubmit={async () => {}}
-        onCancel={() => {}}
-      />
+    <div className="container max-w-4xl py-8">
+      <CreateWorkoutClient />
     </div>
   );
 }

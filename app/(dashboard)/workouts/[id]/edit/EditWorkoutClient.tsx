@@ -5,7 +5,7 @@ import { WorkoutForm } from "../../components/WorkoutForm";
 import { updateWorkout } from "@/app/features/workouts/actions/updateWorkout";
 
 export default function EditWorkoutClient({ workout }: { workout: any }) {
-  const router = useRouter(); 
+  const router = useRouter();
 
   async function handleSubmit(data: any) {
     await updateWorkout({
@@ -21,7 +21,9 @@ export default function EditWorkoutClient({ workout }: { workout: any }) {
       mode="edit"
       defaultValues={workout}
       onSubmit={handleSubmit}
-      onCancel={() => router.back()}
+      onCancel={() => {
+        router.push("/workouts");
+      }}
     />
   );
 }
